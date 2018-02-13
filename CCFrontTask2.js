@@ -220,7 +220,7 @@ let runicWordObject;
                 }
             })
         })
-        runicWordObject = spellpower -= run.length;
+        runicWordObject = spellpower - run.length;
     }
     return runicWordObject;
 }
