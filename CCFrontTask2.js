@@ -150,66 +150,70 @@ const runes = [
 		},
 	]
 exports.generateRunicWords = length => {
-    var choicedRunes = [],
-        result,
-        sortedRunes = [];
-    const runicWords = [];
-    for (var x = 0; x < Math.pow(2, runes.length); x++) {
-        result = [];
-        let i = runes.length - 1;
-        do {
-            if ((x & (1 << i)) !== 0) {
-                result.push(runes[i]);
-            }
-        } while (i--);
-        if (result.length == length) {
-            choicedRunes.push(result);
-        }
-    }
-    
-    choicedRunes.map(arrRunes => {
-        let word = '';
-        let goodspell = '';
-        let pwrd = null;
-        let blocked = [];
-        arrRunes.sort((a, b)=> {
-            return b.power - a.power;
-        });
-        word = arrRunes.map(obj => obj.name).join('-')
-        for (var j = 0; j < arrRunes.length; j++) {
-            pwrd += parseFloat(arrRunes[j].power);
-            blocked.push(arrRunes[j].blocked);
-        }
-        // wiem ze to zły sposob,
-        let include = 0;
-        blocked.map(a => {
-            if (word.includes(a)) {
-                include++;
-            }
-        })
-        if (include == 0) {
-            sortedRunes.push({
-                word: word,
-                power: pwrd - length
-            });
-        }
-    })
+if (isNaN(length) || length == null) {
+	}else{
+	    var choicedRunes = [],
+	        result,
+	        sortedRunes = [];
+	    const runicWords = [];
+	    for (var x = 0; x < Math.pow(2, runes.length); x++) {
+	        result = [];
+	        let i = runes.length - 1;
+	        do {
+	            if ((x & (1 << i)) !== 0) {
+	                result.push(runes[i]);
+	            }
+	        } while (i--);
+	        if (result.length == length) {
+	            choicedRunes.push(result);
+	        }
+	    }
+	    
+	    choicedRunes.map(arrRunes => {
+	        let word = '';
+	        let goodspell = '';
+	        let pwrd = null;
+	        let blocked = [];
+	        arrRunes.sort((a, b)=> {
+	            return b.power - a.power;
+	        });
+	        word = arrRunes.map(obj => obj.name).join('-')
+	        for (var j = 0; j < arrRunes.length; j++) {
+	            pwrd += parseFloat(arrRunes[j].power);
+	            blocked.push(arrRunes[j].blocked);
+	        }
+	        // wiem ze to zły sposob,
+	        let include = 0;
+	        blocked.map(a => {
+	            if (word.includes(a)) {
+	                include++;
+	            }
+	        })
+	        if (include == 0) {
+	            sortedRunes.push({
+	                word: word,
+	                power: pwrd - length
+	            });
+	        }
+	    })
 
-    sortedRunes.sort((a, b)=> {
-        return b.power - a.power;
-    });
-    for (var i = 0; i < 10; i++) {
-        if (sortedRunes[i] !== undefined) {
-            runicWords.push(sortedRunes[i]);
-        }
-    }
+	    sortedRunes.sort((a, b)=> {
+	        return b.power - a.power;
+	    });
+	    for (var i = 0; i < 10; i++) {
+	        if (sortedRunes[i] !== undefined) {
+	            runicWords.push(sortedRunes[i]);
+	        }
+	    }
+	}
     return runicWords
 }
 
 exports.checkRunicWord = runicWord => {
 let runicWordObject;
+// niestety brak walidacji słowa ktore nie jest runem
     if (!isNaN(runicWord) || runicWord == '' || runicWord == null) {
-        return console.log('error');
+        return 'error'
     } else {
         let spellpower = null;
         const run = runicWord.split('-');
@@ -224,3 +228,5 @@ let runicWordObject;
     }
     return runicWordObject;
 }
+
+// sorry za brak komentarzy, brak czasu troszke przeszkodził
