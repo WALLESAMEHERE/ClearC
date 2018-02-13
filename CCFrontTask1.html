@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Clearcode Front-End Task 1</title>
+
+    <style>
+        body {
+            background-color: #FFFF99;
+        }
+        .container {
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 97vh;
+        }
+        ul {
+            width: 100%;
+        }
+        span {
+            font-weight: bold;
+        }
+        li {
+            display: inline-block;
+            background-color: #EEEEEE;
+            border-radius: 5px;
+            text-decoration: none;
+            width: 90%;
+            border: 1px solid #999999;
+            font-family: Arial;
+            padding: 0 5px;
+        }
+        li:nth-child(odd) .text {
+            color: #666666;
+        }
+        li:nth-child(odd) p {
+            color: black;
+        }
+        li:nth-child(even) span {
+            color: #666666;
+
+        }
+        li:nth-child(even) {
+            float: right;
+            margin-bottom: -1px;
+            margin-top: -5px;
+        }
+        .text {
+            float: left;
+            width: 65%;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .al_right {
+            text-align: right;
+        }
+        /* RWD */
+
+        @media all and (min-width:600px) {
+            ul {
+                width: 70%;
+            }
+            .text {
+                width: 75%;
+            }
+        }
+        @media all and (min-width:900px) {
+            ul {
+                width: 60%;
+            }
+        }
+        @media all and (min-width:1500px) {
+            ul {
+                width: 40%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <ul>
+            <li class="">
+                <p class="text">Short text</p>
+                <p class="al_right"><span>Is Short</span></p>
+
+            </li>
+            <li class="">
+                <p class="text">A little bit longer text</p>
+                <p class="al_right"><span>Is longer</span></p>
+
+            </li>
+            <li class="">
+                <p class="text">A long text is here, totally for no reason</p>
+                <p class="al_right"><span>Is long.</span>
+
+            </li>
+            <li class="">
+                <p class="text">A long text is here also, for the same reason</p>
+                <p class="al_right"><span>Is long too!</span></p>
+
+            </li>
+            <li class="">
+                <p class="text">A long text is here also, for the same reason</p>
+                <p class="al_right"><span>Is long too!</span></p>
+
+            </li>
+            <li class="">
+                <p class="text">Ok</p>
+                <p class="al_right"><span>Ok</span></p>
+
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
