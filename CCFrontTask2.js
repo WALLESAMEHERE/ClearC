@@ -100,7 +100,7 @@ const runes = [
 			power:"16",
 			blocked:"Ral"
 		},{
-			name:"Ko",
+			name:"Mal",
 			power:"21",
 			blocked:"Ko"
 		},{
@@ -151,6 +151,7 @@ const runes = [
 	]
 exports.generateRunicWords = length => {
 if (isNaN(length) || length == null) {
+	return "ERROR";
 	}else{
 	    var choicedRunes = [],
 	        result,
@@ -211,20 +212,27 @@ if (isNaN(length) || length == null) {
 
 exports.checkRunicWord = runicWord => {
 let runicWordObject;
-// niestety brak walidacji słowa ktore nie jest runem
     if (!isNaN(runicWord) || runicWord == '' || runicWord == null) {
         return 'error'
     } else {
         let spellpower = null;
         const run = runicWord.split('-');
+        let ifRunIsValid = 0;
         run.map(a => {
             runes.map(b => {
-                if (b.name.includes(a)) {
-                    spellpower += parseFloat(b.power);
+            		// check if run is in array
+                if (b.name === a) {
+                		ifRunIsValid++;
+                    spellpower += parseFloat(b.power); 
                 }
             })
         })
-        runicWordObject = spellpower - run.length;
+        if(ifRunIsValid === run.length){
+        
+        	  runicWordObject = spellpower - run.length;
+        }else{
+        		return 'MAGIC WORD IS INVALID';
+        }
     }
     return runicWordObject;
 }
