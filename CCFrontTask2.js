@@ -150,90 +150,90 @@ const runes = [
 		},
 	]
 exports.generateRunicWords = length => {
-if (isNaN(length) || length == null) {
-	return "ERROR";
-	}else{
-	    var choicedRunes = [],
-	        result,
-	        sortedRunes = [];
-	    const runicWords = [];
-	    for (var x = 0; x < Math.pow(2, runes.length); x++) {
-	        result = [];
-	        let i = runes.length - 1;
-	        do {
-	            if ((x & (1 << i)) !== 0) {
-	                result.push(runes[i]);
-	            }
-	        } while (i--);
-	        if (result.length == length) {
-	            choicedRunes.push(result);
-	        }
-	    }
-	    
-	    choicedRunes.map(arrRunes => {
-	        let word = '';
-	        let goodspell = '';
-	        let pwrd = null;
-	        let blocked = [];
-	        arrRunes.sort((a, b)=> {
-	            return b.power - a.power;
-	        });
-	        word = arrRunes.map(obj => obj.name).join('-')
-	        for (var j = 0; j < arrRunes.length; j++) {
-	            pwrd += parseFloat(arrRunes[j].power);
-	            blocked.push(arrRunes[j].blocked);
-	        }
-	        // wiem ze to zły sposob,
-	        let include = 0;
-	        blocked.map(a => {
-	            if (word.includes(a)) {
-	                include++;
-	            }
-	        })
-	        if (include == 0) {
-	            sortedRunes.push({
-	                word: word,
-	                power: pwrd - length
-	            });
-	        }
-	    })
+	const runicWords = [];
+	if (isNaN(length) || length == null) {
+		return "ERROR";
+		}else{
+		    let choicedRunes = [],
+		        result,
+		        sortedRunes = [];
+		    for (let x = 0; x < Math.pow(2, runes.length); x++) {
+		        result = [];
+		        let i = runes.length - 1;
+		        do {
+		            if ((x & (1 << i)) !== 0) {
+		                result.push(runes[i]);
+		            }
+		        } while (i--);
+		        if (result.length == length) {
+		            choicedRunes.push(result);
+		        }
+		    }
+		    
+		    choicedRunes.map(arrRunes => {
+		        let word = '';
+		        let goodspell = '';
+		        let pwrd = null;
+		        let blocked = [];
+		        arrRunes.sort((a, b)=> {
+		            return b.power - a.power;
+		        });
+		        word = arrRunes.map(obj => obj.name).join('-')
+		        for (let j = 0; j < arrRunes.length; j++) {
+		            pwrd += parseFloat(arrRunes[j].power);
+		            blocked.push(arrRunes[j].blocked);
+		        }
+		        // wiem ze to zły sposob,
+		        let include = 0;
+		        blocked.map(a => {
+		            if (word.includes(a)) {
+		                include++;
+		            }
+		        })
+		        if (include == 0) {
+		            sortedRunes.push({
+		                word: word,
+		                power: pwrd - length
+		            });
+		        }
+		    })
 
-	    sortedRunes.sort((a, b)=> {
-	        return b.power - a.power;
-	    });
-	    for (var i = 0; i < 10; i++) {
-	        if (sortedRunes[i] !== undefined) {
-	            runicWords.push(sortedRunes[i]);
-	        }
-	    }
+		    sortedRunes.sort((a, b)=> {
+		        return b.power - a.power;
+		    });
+		    for (let i = 0; i < 10; i++) {
+		        if (sortedRunes[i] !== undefined) {
+		            runicWords.push(sortedRunes[i]);
+		        }
+		    }
+		}
+	    return runicWords
 	}
-    return runicWords
-}
 
-exports.checkRunicWord = runicWord => {
-let runicWordObject;
-    if (!isNaN(runicWord) || runicWord == '' || runicWord == null) {
-        return 'error'
-    } else {
-        let spellpower = null;
-        const run = runicWord.split('-');
-        let ifRunIsValid = 0;
-        run.map(a => {
-            runes.map(b => {
-            		// check if run is in array
-                if (b.name === a) {
-                		ifRunIsValid++;
-                    spellpower += parseFloat(b.power); 
-                }
-            })
-        })
-        if(ifRunIsValid === run.length){
-        
-        	  runicWordObject = spellpower - run.length;
-        }else{
-        		return 'MAGIC WORD IS INVALID';
-        }
-    }
+	exports.checkRunicWord = runicWord => {
+	let runicWordObject;
+	    if (!isNaN(runicWord) || runicWord == '' || runicWord == null) {
+	        return 'error'
+	    } else {
+	        let spellpower = null;
+	        const run = runicWord.split('-');
+	        let ifRunIsValid = 0;
+	        run.map(a => {
+	            runes.map(b => {
+	            		// check if run is in array
+	                if (b.name === a) {
+	                		ifRunIsValid++;
+	                    spellpower += parseFloat(b.power); 
+	                }
+	            })
+	        })
+	        if(ifRunIsValid === run.length){
+	        
+	        	  runicWordObject = spellpower - run.length;
+	        }else{
+	        		return 'MAGIC WORD IS INVALID';
+	        }
+	    }
     return runicWordObject;
 }
 
